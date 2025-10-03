@@ -1,0 +1,61 @@
+import java.util.Iterator;
+import java.util.ArrayList;
+
+public class DS3_Set<E> implements SetInterface<E>
+{
+    private ArrayList<E> bob= new ArrayList<>();
+
+    @Override
+    public boolean add(E o)
+    {
+        for (E val:bob)
+        {
+            if (val==bob)
+                return false;
+        }
+        bob.add(o);
+        return true;
+    }
+
+    @Override
+    public void clear()
+    {
+        bob.clear();
+
+    }
+
+    @Override
+    public boolean contains(E o)
+    {
+        for (E val:bob)
+        {
+            if (val==o)
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return bob.isEmpty();
+    }
+
+    @Override
+    public Iterator<E> iterator()
+    {
+        return bob.iterator();
+    }
+
+    @Override
+    public boolean remove(E o)
+    {
+        return bob.remove(o);
+    }
+
+    @Override
+    public int size()
+    {
+        return bob.size();
+    }
+}
