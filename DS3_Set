@@ -29,7 +29,7 @@ public class DS3_Set<E> implements SetInterface<E>
     {
         for (E val:bob)
         {
-            if (val==o)
+            if (val.equals(o))
                 return true;
         }
         return false;
