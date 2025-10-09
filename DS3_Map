@@ -36,48 +36,93 @@ public class DS3_Map<K,V>implements MapInterface<K,V>
     @Override
     public DS3_Set<MapEnt<K, V>> entrySet()
     {
-        DS3_Set<String> set= new DS3_Set<>();
+        DS3_Set<MapEnt<K,V>> set= new DS3_Set<>();
 
 
-        for (int i=0; i< bobbert.size();i++)
+        for (MapEnt<K, V> entry: bobbert)
         {
-            set.add(bobbert.get(i).getKey()+"="+bobbert.get(i).getValue());
+            set.add(entry);
         }
         return set;
     }
 
     @Override
-    public V get(K o) {
+    public V get(K o)
+    {
+        for (MapEnt<K, V> Key:bobbert)
+        {
+            if (Key.getKey().equals(o))
+            {
+                return Key.getValue();
+            }
+        }
+
         return null;
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
+    public boolean isEmpty()
+    {
+        return bobbert.isEmpty();
     }
 
     @Override
-    public V put(K key, V value) {
+    public V put(K key, V value)
+    {
+        for (int i=0; i< bobbert.size();i++)
+        {
+            if (bobbert.get(i).getKey().equals(key))
+            {
+                V replacedVal=bobbert.get(i).getValue();
+                bobbert.set(i, new MapEnt<>(key,value));
+                return replacedVal;
+            }
+        }
+        bobbert.add(new MapEnt<>(key,value));
         return null;
     }
 
     @Override
-    public int size() {
-        return 0;
+    public int size()
+    {
+        return bobbert.size();
     }
 
     @Override
-    public DS3_Set<K> keySet() {
-        return null;
+    public DS3_Set<K> keySet()
+    {
+        DS3_Set<K> set= new DS3_Set<>();
+        for (MapEnt<K, V> key:bobbert)
+        {
+            set.add(key.getKey());
+        }
+        return set;
     }
 
     @Override
-    public ArrayList<V> values() {
-        return null;
+    public ArrayList<V> values()
+    {
+        ArrayList<V> values= new ArrayList<>();
+       for (MapEnt<K,V> value: bobbert)
+       {
+           values.add(value.getValue());
+       }
+       return values;
     }
 
     @Override
-    public V remove(K key) {
+    public V remove(K key)
+    {
+        for (int i=0; i<bobbert.size();i++)
+        {
+            if (bobbert.get(i).getKey().equals(key))
+            {
+                V j= bobbert.get(i).getValue();
+                bobbert.remove(bobbert.get(i));
+                return j;
+            }
+        }
         return null;
+
     }
 }
