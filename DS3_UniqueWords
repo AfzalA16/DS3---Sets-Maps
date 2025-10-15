@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class DS3_UniqueWords
 
     {
         Scanner j=new Scanner(System.in);
+        System.out.println("Enter the file name: ");
         String textFile= j.nextLine();
         DS3_Set<String> words= new DS3_Set<>();
         String line="";
@@ -18,28 +20,33 @@ public class DS3_UniqueWords
             Scanner fromFile= new Scanner(new File(textFile));
             while (fromFile.hasNextLine())
             {
-                Scanner fromText = new Scanner(fromFile.nextLine()).useDelimiter("[–_.,:;?!\" ]");
+                Scanner fromText = new Scanner(fromFile.nextLine()).useDelimiter("[–_.,:;?!\"() ]");
                 while (fromText.hasNext())
                 {
                     String word=fromText.next();
-                    char[] wordCharacters=word.toCharArray();
-                    
-                    for (int i=0; i<wordCharacters.length;i++)
+                    word=word.toLowerCase();
+                    String word2="";
+                    if (word.contains("’"))
                     {
-                        if (wordCharacters[i]=='’')
-                            wordCharacters[i]
+                        char[] wordCharacters = word.toCharArray();
+                        for (char character : wordCharacters)
+                        {
+                            if (character!='’'&&character!=' ')
+                            {
+                                word2+=character;
+                            }
+                        }
+                        words.add(word2);
                     }
-                    
-                    if (!word.isEmpty()&&!word.equals("–")) 
+
+
+                    else if (!word.isEmpty()&&!word.equals("–"))
                     {
-                        System.out.println("THIS IS THE WORD: " + word);
-                        word = word.toLowerCase();
-                        words.add(word);
+//                        System.out.println("THIS IS THE WORD: " + word);
+                        word2 = word.toLowerCase();
+                        words.add(word2);
                     }
-                    else
-                    {
-                        
-                    }
+
 
                 }
 //                 line+=fromText.toString();
