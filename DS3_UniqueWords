@@ -1,0 +1,67 @@
+import java.io.File;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class DS3_UniqueWords
+{
+
+    public static void main(String[] args)
+
+    {
+        Scanner j=new Scanner(System.in);
+        String textFile= j.nextLine();
+        DS3_Set<String> words= new DS3_Set<>();
+        String line="";
+
+        try
+        {
+            Scanner fromFile= new Scanner(new File(textFile));
+            while (fromFile.hasNextLine())
+            {
+                Scanner fromText = new Scanner(fromFile.nextLine()).useDelimiter("[–_.,:;?!\" ]");
+                while (fromText.hasNext())
+                {
+                    String word=fromText.next();
+                    char[] wordCharacters=word.toCharArray();
+                    
+                    for (int i=0; i<wordCharacters.length;i++)
+                    {
+                        if (wordCharacters[i]=='’')
+                            wordCharacters[i]
+                    }
+                    
+                    if (!word.isEmpty()&&!word.equals("–")) 
+                    {
+                        System.out.println("THIS IS THE WORD: " + word);
+                        word = word.toLowerCase();
+                        words.add(word);
+                    }
+                    else
+                    {
+                        
+                    }
+
+                }
+//                 line+=fromText.toString();
+//                line=line.toLowerCase();
+
+            }
+            fromFile.close();
+        }
+
+        catch (Exception e)
+        {
+            // Displays that there was an error and what the error was
+            System.out.println("Error while reading from file:");
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+        Iterator<String> wordsIterator= words.iterator();
+
+        while (wordsIterator.hasNext())
+        {
+            System.out.println(wordsIterator.next());
+        }
+    }
+}
